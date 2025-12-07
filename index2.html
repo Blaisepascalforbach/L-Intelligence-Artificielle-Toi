@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module : Comprendre l'IA et ses Enjeux</title>
+    <style>
+        :root {
+            /* Changement de couleur pour une ambiance plus "Tech/Éthique" */
+            --primary-color: #4285f4; /* Google Blue */
+            --accent-color: #ea4335;  /* Alert/Critical thinking color */
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-color: #202124;
+            --success-color: #34a853;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 1.8rem; }
+        h2 { font-size: 1rem; opacity: 0.9; font-weight: 400; margin-top: 10px; }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .section-card:hover {
+            transform: translateY(-2px);
+        }
+
+        h3 { 
+            color: var(--primary-color); 
+            border-bottom: 2px solid #e8eaed;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .objectives-list li {
+            margin-bottom: 8px;
+            padding-left: 5px;
+        }
+
+        .key-concepts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .concept {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .concept.warning {
+            border-left-color: var(--accent-color);
+            background: #fce8e6;
+        }
+
+        /* Quiz Styles */
+        .quiz-container { margin-top: 20px; }
+        
+        .question { 
+            font-weight: 600; 
+            margin-bottom: 12px; 
+            font-size: 1.1rem;
+        }
+
+        .options { display: flex; flex-direction: column; gap: 8px; }
+
+        .options button {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1rem;
+            transition: all 0.2s;
+            color: var(--text-color);
+        }
+
+        .options button:hover {
+            background-color: #f1f3f4;
+            border-color: #d2d2d2;
+        }
+
+        .feedback {
+            margin-top: 12px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-size: 0.95rem;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .correct { background-color: #e6f4ea; color: #137333; border: 1px solid #ceead6; }
+        .incorrect { background-color: #fce8e6; color: #c5221f; border: 1px solid #fad2cf; }
+
+        /* Google Tools Buttons */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-tool {
+            display: flex;
+            flex-direction: column; /* Organiser le texte sur deux lignes */
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            background-color: white;
+            border: 1px solid #dadce0;
+            padding: 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #3c4043;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-align: center;
+            min-height: 100px; /* Pour un aspect uniforme */
+        }
+        
+        .btn-tool span {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #5f6368;
+        }
+
+        .btn-tool:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-tool strong {
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>L'Intelligence Artificielle & Toi</h1>
+        <h2>Module d'Éducation aux Médias - Cycle 4 / Lycée</h2>
+    </header>
+
+    <div class="section-card">
+        <h3>🎯 Objectifs de la séance</h3>
+        <p>L'IA est partout, mais est-ce de la magie ou des maths ? Avant de lancer la vidéo, garde ces questions en tête :</p>
+        <ul class="objectives-list">
+            <li>🔎 <strong>Observer :</strong> L'IA a-t-elle une conscience ou des sentiments ?</li>
+            <li>🧠 <strong>Comprendre :</strong> Comment l'IA "apprend-elle" à reconnaître un chat d'un chien ?</li>
+            <li>🛡️ <strong>Critiquer :</strong> Quel est le risque principal évoqué concernant l'information ?</li>
+        </ul>
+    </div>
+
+    <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/PBJ9_G8d6mo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+
+    <div class="section-card">
+        <h3>💡 Ce qu'il faut retenir</h3>
+        <div class="key-concepts">
+            <div class="concept">
+                <strong>🤖 C'est quoi ?</strong><br>
+                Ce n'est pas un cerveau ! C'est un programme informatique capable d'imiter certaines fonctions humaines (calculer, reconnaître, jouer) en analysant des milliards de données.
+            </div>
+            <div class="concept">
+                <strong>🎓 Le Machine Learning</strong><br>
+                L'IA n'est pas "intelligente" par magie. Elle s'entraîne. Pour reconnaître un chat, on doit lui montrer des milliers de photos de chats. C'est l'entraînement.
+            </div>
+            <div class="concept warning">
+                <strong>⚠️ Usage Raisonné</strong><br>
+                L'IA peut créer des fausses informations (Fake News) ou être biaisée. Elle n'a ni morale, ni vérité. C'est à toi de vérifier ses réponses !
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h3>🧠 Quiz : As-tu bien suivi ? (4 Questions)</h3>
+        
+        <div class="quiz-container" id="q1">
+            <div class="question">1. Une IA ressent-elle des émotions (colère, joie) ?</div>
+            <div class="options">
+                <button onclick="checkAnswer('q1', false)">Oui, elle peut être triste.</button>
+                <button onclick="checkAnswer('q1', true)">Non, elle ne fait qu'imiter.</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+        <div class="quiz-container" id="q2">
+            <div class="question">2. Quel est un risque majeur de l'IA pour l'information ?</div>
+            <div class="options">
+                <button onclick="checkAnswer('q2', true)">Elle peut générer de fausses infos crédibles.</button>
+                <button onclick="checkAnswer('q2', false)">Elle risque de tomber amoureuse.</button>
+                <button onclick="checkAnswer('q2', false)">Elle va arrêter de fonctionner la nuit.</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+        
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+        <div class="quiz-container" id="q3">
+            <div class="question">3. L'IA a été entraînée avec des images majoritairement masculines pour les PDG. Si elle dessine un homme, pourquoi ?</div>
+            <div class="options">
+                <button onclick="checkAnswer('q3', false)">Parce que l'IA est programmée pour être sexiste.</button>
+                <button onclick="checkAnswer('q3', true)">Parce qu'elle reproduit les statistiques de ses données d'entraînement (Biais).</button>
+                <button onclick="checkAnswer('q3', false)">Parce qu'elle n'a pas accès aux données sur les femmes.</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+        <div class="quiz-container" id="q4">
+            <div class="question">4. L'utilisation de l'IA générative (ChatGPT, Gemini) est-elle neutre écologiquement ?</div>
+            <div class="options">
+                <button onclick="checkAnswer('q4', false)">Oui, tant qu'on utilise un ordinateur portable.</button>
+                <button onclick="checkAnswer('q4', true)">Non, produire une réponse est beaucoup plus énergivore qu'une simple recherche web.</button>
+                <button onclick="checkAnswer('q4', false)">Non, à cause de l'électricité consommée par ton propre écran.</button>
+            </div>
+            <div class="feedback"></div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h3>🚀 Passe à la pratique ! (Activités pour l'expérimentation)</h3>
+        <p>Ne crois pas sur parole, teste comment la machine apprend et comment les biais s'installent :</p>
+        <div class="tools-grid">
+            <a href="https://quickdraw.withgoogle.com/" target="_blank" class="btn-tool">
+                ✏️ <strong>Quick, Draw!</strong>
+                <span>Vois si l'IA reconnaît tes dessins (Machine Learning).</span>
+            </a>
+            <a href="https://teachablemachine.withgoogle.com/" target="_blank" class="btn-tool">
+                🤖 <strong>Teachable Machine</strong>
+                <span>Entraîne ta propre IA (sans coder) pour comprendre l'apprentissage.</span>
+            </a>
+            <a href="https://www.moralmachine.net/hl/fr" target="_blank" class="btn-tool">
+                ⚖️ <strong>Moral Machine (MIT)</strong>
+                <span>Expérimente les choix éthiques que l'IA doit faire (en français).</span>
+            </a>
+            <a href="https://www.survivalofthebestfit.com/" target="_blank" class="btn-tool">
+                👨‍💼 <strong>Bias Test (Recrutement)</strong>
+                <span>Joue à entraîner une IA pour voir comment le biais s'installe.</span>
+            </a>
+            <a href="https://images.google.com/" target="_blank" class="btn-tool">
+                🕵️ <strong>Google Images</strong>
+                <span>Vérifie la source d'une image (Fake checking).</span>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function checkAnswer(questionId, isCorrect) {
+        const container = document.getElementById(questionId);
+        const feedback = container.querySelector('.feedback');
+        const buttons = container.querySelectorAll('button');
+
+        // Désactiver les boutons après réponse pour éviter le spam
+        buttons.forEach(btn => btn.disabled = true);
+
+        let feedbackText = "";
+
+        if (questionId === 'q1') {
+            if (isCorrect) {
+                feedbackText = "<strong>✅ Excellent !</strong> L'IA n'a pas de conscience ni de sentiments. C'est un algorithme qui ne fait que simuler des réponses sur la base de ses données.";
+            } else {
+                feedbackText = "<strong>❌ Pas tout à fait.</strong> Attention à l'anthropomorphisme : on a l'impression qu'elle ressent, mais l'IA ne fait que simuler des émotions humaines.";
+            }
+        } else if (questionId === 'q2') {
+            if (isCorrect) {
+                feedbackText = "<strong>✅ Exact !</strong> C'est ce qu'on appelle les 'hallucinations' ou la création de Deepfakes. L'IA cherche la vraisemblance, pas la vérité factuelle.";
+            } else {
+                feedbackText = "<strong>❌ Pas tout à fait.</strong> Ce n'est pas un film de science-fiction. Le vrai danger actuel, c'est la désinformation et la génération de fausses preuves.";
+            }
+        } else if (questionId === 'q3') {
+            if (isCorrect) {
+                feedbackText = "<strong>✅ Correct !</strong> L'IA n'a pas d'intention : elle applique des statistiques. Elle copie les clichés humains présents dans les millions d'images qu'elle a vues (on parle de Biais d'entraînement).";
+            } else {
+                feedbackText = "<strong>❌ Non.</strong> L'IA n'est pas intentionnellement sexiste. Elle reproduit simplement les données historiques et les stéréotypes que la société lui a donnés en pâture.";
+            }
+        } else if (questionId === 'q4') {
+            if (isCorrect) {
+                feedbackText = "<strong>✅ Tout à fait !</strong> L'IA demande énormément de ressources (eau, énergie) pour fonctionner et s'entraîner. C'est pourquoi le Ministère recommande l'usage 'frugal'.";
+            } else {
+                feedbackText = "<strong>❌ Non.</strong> Le coût écologique est principalement lié aux serveurs puissants et à la consommation énergétique des centres de données. L'usage doit être raisonné.";
+            }
+        }
+
+
+        if (isCorrect) {
+            feedback.className = "feedback correct";
+        } else {
+            feedback.className = "feedback incorrect";
+        }
+        
+        feedback.innerHTML = feedbackText;
+        feedback.style.display = "block";
+    }
+</script>
+
+</body>
+</html>
